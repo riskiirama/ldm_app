@@ -8,88 +8,88 @@ class WelcomePage extends StatelessWidget {
   final welcomeController = Get.put(WelcomeController());
   @override
   Widget build(BuildContext context) {
-    /* Widget cartButton() {
+    Widget cartButton() {
       return FloatingActionButton(
         backgroundColor: blueColor,
         onPressed: () {},
-        child: Image.asset(
-          'assets/icon_cart.png',
-          width: 20,
+        child: Icon(Icons.add),
+      );
+    }
+
+    Widget customBottomNav() {
+      return BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 12,
+        clipBehavior: Clip.antiAlias,
+        child: BottomNavigationBar(
+          onTap: (index) {
+            welcomeController.currentIndex.value = index;
+          },
+          selectedItemColor: Colors.white,
+          backgroundColor: Color(0xFF7879F1),
+          type: BottomNavigationBarType.fixed,
+          currentIndex: welcomeController.currentIndex.value,
+          items: [
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: EdgeInsets.only(top: 20, bottom: 10),
+                child: Icon(
+                  Icons.home,
+                ),
+              ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: EdgeInsets.only(
+                  top: 20,
+                  bottom: 10,
+                ),
+                child: Icon(
+                  Icons.date_range_outlined,
+                ),
+              ),
+              label: 'Penugasan',
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: EdgeInsets.only(
+                  top: 20,
+                  bottom: 10,
+                ),
+                child: Icon(
+                  Icons.notifications,
+                ),
+              ),
+              label: 'Barang',
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: EdgeInsets.only(
+                  top: 20,
+                  bottom: 10,
+                ),
+                child: Icon(
+                  Icons.person_outline_outlined,
+                ),
+              ),
+              label: 'Profile',
+            ),
+          ],
         ),
       );
     }
-*/
-    /*  Widget customBottomNav() {
-      return ClipRRect(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30),
-        ),
-        child: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          notchMargin: 12,
-          clipBehavior: Clip.antiAlias,
-          child: BottomNavigationBar(
-            selectedItemColor: Colors.white,
-            backgroundColor: Color(0xFF7879F1),
-            type: BottomNavigationBarType.fixed,
-            currentIndex: welcomeController.currentIndex.value,
-            items: [
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 10),
-                  child: Icon(
-                    Icons.home,
-                  ),
-                ),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(
-                    top: 20,
-                    bottom: 10,
-                  ),
-                  child: Icon(
-                    Icons.date_range_outlined,
-                  ),
-                ),
-                label: 'Penugasan',
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(
-                    top: 20,
-                    bottom: 10,
-                  ),
-                  child: Icon(
-                    Icons.notifications,
-                  ),
-                ),
-                label: 'Barang',
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(
-                    top: 20,
-                    bottom: 10,
-                  ),
-                  child: Icon(
-                    Icons.person_outline_outlined,
-                  ),
-                ),
-                label: 'Profile',
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-*/
+
     return Obx(() {
       return Scaffold(
+        backgroundColor: Colors.white,
+        floatingActionButton: cartButton(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: customBottomNav(),
         body: welcomeController.screens[welcomeController.currentIndex.value],
-        bottomNavigationBar: BottomNavigationBar(
+        /*    bottomNavigationBar: BottomNavigationBar(
           backgroundColor: blueColor,
+          
           selectedItemColor: Colors.white,
           type: BottomNavigationBarType.fixed,
           currentIndex: welcomeController.currentIndex.value,
@@ -129,6 +129,7 @@ class WelcomePage extends StatelessWidget {
             welcomeController.currentIndex.value = index;
           },
         ),
+        */
       );
     });
   }

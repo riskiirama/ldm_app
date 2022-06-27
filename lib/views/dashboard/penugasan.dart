@@ -193,7 +193,7 @@ class PenugasanPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xfff1F2F7),
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
             Container(
               height: 138,

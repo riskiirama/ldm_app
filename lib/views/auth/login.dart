@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xffF1F2F7),
       body: ListView(
-        padding: EdgeInsets.only(left: 37, right: 37, top: 80),
+        padding: EdgeInsets.only(left: 37, right: 37, top: 200),
         children: [
           Image.asset(
             'assets/images/komputer.png',

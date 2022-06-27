@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ldm_app/components/theme.dart';
 import 'package:ldm_app/components/widgets/card_profile.dart';
+import 'package:ldm_app/routes/route_app.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -103,7 +105,11 @@ class ProfilePage extends StatelessWidget {
                           Icon(Icons.login_outlined, color: Color(0xffF9232E)),
                     ),
                     SizedBox(width: 23),
-                    Text('Logout'),
+                    InkWell(
+                        onTap: () {
+                          Get.toNamed(RouteHelper.login);
+                        },
+                        child: Text('Logout')),
                   ],
                 ),
               ),

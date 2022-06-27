@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ldm_app/views/dashboard/add.dart';
+
 import 'package:ldm_app/views/dashboard/barang.dart';
 import 'package:ldm_app/views/dashboard/penugasan.dart';
 
@@ -12,7 +12,6 @@ class WelcomeController extends GetxController {
   var screens = [
     HomePage(),
     PenugasanPage(),
-    AddPage(),
     BarangPage(),
     ProfilePage(),
   ];
