@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ldm_app/components/theme.dart';
+import 'package:ldm_app/routes/route_app.dart';
+
+import '../../views/dashboard/view_page.dart';
 
 class CardPenugasan extends StatelessWidget {
   final String title;
@@ -11,7 +15,7 @@ class CardPenugasan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 17, left: 15, right: 26),
+      padding: EdgeInsets.only(top: 17, left: 15, right: 4),
       height: 128,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -43,9 +47,12 @@ class CardPenugasan extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 color: Color(0xff363942)),
           ),
-          Divider(
-            thickness: 1,
-            color: Color(0XFFBFBFBF),
+          Padding(
+            padding: const EdgeInsets.only(right: 24),
+            child: Divider(
+              thickness: 1,
+              color: Color(0XFFBFBFBF),
+            ),
           ),
           Container(
             //   padding: EdgeInsets.only(right: 20, bottom: 8),
@@ -84,11 +91,47 @@ class CardPenugasan extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 15,
-                ),
-                Icon(
-                  Icons.more_vert_outlined,
+                PopupMenuButton(
+                  iconSize: 20,
+                  offset: Offset.zero,
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                        value: 'View',
+                        onTap: () {
+                          Get.toNamed(RouteHelper.login);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('View'),
+                            Icon(Icons.remove_red_eye_outlined),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'edit',
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Edit'),
+                            Icon(Icons.edit),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'delete',
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Delete'),
+                            Icon(Icons.restore_from_trash_outlined),
+                          ],
+                        ),
+                      )
+                    ];
+                  },
+                  onSelected: (String value) {},
                 ),
               ],
             ),

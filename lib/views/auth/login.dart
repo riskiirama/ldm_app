@@ -4,7 +4,7 @@ import 'package:ldm_app/components/theme.dart';
 import 'package:ldm_app/routes/route_app.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  var hidden = true.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -57,19 +57,31 @@ class LoginPage extends StatelessWidget {
           Container(
             width: 286,
             height: 46,
-            child: TextFormField(
-              decoration: InputDecoration(
-                filled: true,
-                //  fillColor: Colors.black,
-                prefixIcon: Icon(Icons.lock),
-                contentPadding: EdgeInsets.only(top: 7, bottom: 6),
-                hintText: 'Password',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
+            child: Obx(() {
+              return TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  filled: true,
+                  //  fillColor: Colors.black,
+                  prefixIcon: Icon(Icons.lock),
+                  contentPadding: EdgeInsets.only(top: 7, bottom: 6),
+                  hintText: 'Password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: IconButton(
+                    onPressed: () => hidden.toggle(),
+                    icon: hidden.isTrue
+                        ? Icon(Icons.remove_red_eye)
+                        : Icon(
+                            Icons.remove_red_eye_outlined,
+                            color: Colors.grey,
+                          ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            }),
           ),
           SizedBox(height: 42),
           Container(
