@@ -93,7 +93,7 @@ class LoginPage extends StatelessWidget {
             ),
             child: TextButton(
               onPressed: () {
-                Get.toNamed(RouteHelper.welcome);
+                Get.toNamed(RouteHelper.role);
               },
               child: Text(
                 'Login',

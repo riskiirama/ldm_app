@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
             height: 56,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.amber,
+              color: Color(0xFF7879F1),
             ),
           ),
           SizedBox(width: 16),

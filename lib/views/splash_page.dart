@@ -37,8 +37,8 @@ class _SplashPageState extends State<SplashPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  height: 14,
-                  width: 14,
+                  height: 8,
+                  width: 8,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
@@ -46,8 +46,8 @@ class _SplashPageState extends State<SplashPage> {
                 ),
                 SizedBox(width: 5),
                 Container(
-                  height: 14,
-                  width: 14,
+                  height: 8,
+                  width: 8,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
@@ -55,8 +55,8 @@ class _SplashPageState extends State<SplashPage> {
                 ),
                 SizedBox(width: 5),
                 Container(
-                  height: 14,
-                  width: 14,
+                  height: 8,
+                  width: 8,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,

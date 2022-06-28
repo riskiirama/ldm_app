@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ldm_app/components/theme.dart';
 import 'package:ldm_app/routes/route_app.dart';
-
-import '../../views/dashboard/view_page.dart';
+import 'package:ldm_app/views/dashboard/role/supervisor/edit_tugas.dart';
+import 'package:ldm_app/views/dashboard/role/supervisor/view_tugas.dart';
 
 class CardPenugasan extends StatelessWidget {
   final String title;
@@ -91,16 +91,13 @@ class CardPenugasan extends StatelessWidget {
                     ),
                   ),
                 ),
-                PopupMenuButton(
+                PopupMenuButton<int>(
                   iconSize: 20,
-                  offset: Offset.zero,
+                  // offset: Offset.zero,
                   itemBuilder: (context) {
                     return [
                       PopupMenuItem(
-                        value: 'View',
-                        onTap: () {
-                          Get.toNamed(RouteHelper.login);
-                        },
+                        value: 0,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -110,7 +107,7 @@ class CardPenugasan extends StatelessWidget {
                         ),
                       ),
                       PopupMenuItem(
-                        value: 'edit',
+                        value: 1,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -120,7 +117,7 @@ class CardPenugasan extends StatelessWidget {
                         ),
                       ),
                       PopupMenuItem(
-                        value: 'delete',
+                        value: 2,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -131,7 +128,7 @@ class CardPenugasan extends StatelessWidget {
                       )
                     ];
                   },
-                  onSelected: (String value) {},
+                  onSelected: (item) => SelectedItem(context, item),
                 ),
               ],
             ),
@@ -139,5 +136,86 @@ class CardPenugasan extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void SelectedItem(BuildContext context, item) {
+    switch (item) {
+      case 0:
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) {
+            return ViewTugasPage();
+          }),
+        );
+        break;
+      case 1:
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) {
+            return EditTugasPage();
+          }),
+        );
+        break;
+      case 2:
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            contentPadding:
+                EdgeInsets.only(left: 13, right: 13, bottom: 31, top: 7),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            backgroundColor: Color(0xff5D5FEF),
+            title: Column(
+              children: [
+                Icon(
+                  Icons.warning_amber,
+                  color: Colors.orange,
+                  size: 42,
+                ),
+                SizedBox(
+                  height: 43,
+                ),
+                Text(
+                  'Anda yakin akan \nmenghapus Ini?',
+                  style: blackStyle.copyWith(
+                    fontSize: 24,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Container(
+                    color: Color(0xff24D748),
+                    padding: const EdgeInsets.all(14),
+                    child: const Text(
+                      "Ya",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Container(
+                    color: Color(0xffE41830),
+                    padding: const EdgeInsets.all(14),
+                    child: const Text(
+                      "Tidak",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+    }
   }
 }

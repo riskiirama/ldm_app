@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ldm_app/components/widgets/card_barang.dart';
 
-import '../../components/theme.dart';
+import '../../../../components/theme.dart';
 
 class BarangPage extends StatelessWidget {
   const BarangPage({Key? key}) : super(key: key);
@@ -85,25 +85,21 @@ class BarangPage extends StatelessWidget {
                     CardBarang(
                       image: 'assets/images/route.png',
                       title: 'TP-LINK TL-WR940N',
-                      icon: Icon(Icons.more_vert_rounded),
                     ),
                     SizedBox(height: 30),
                     CardBarang(
                       image: 'assets/images/route.png',
                       title: 'TP-LINK TL-WR940N',
-                      icon: Icon(Icons.more_vert_rounded),
                     ),
                     SizedBox(height: 30),
                     CardBarang(
                       image: 'assets/images/route.png',
                       title: 'TP-LINK TL-WR940N',
-                      icon: Icon(Icons.more_vert_rounded),
                     ),
                     SizedBox(height: 30),
                     CardBarang(
                       image: 'assets/images/route.png',
                       title: 'TP-LINK TL-WR940N',
-                      icon: Icon(Icons.more_vert_rounded),
                     ),
                   ],
                 ),

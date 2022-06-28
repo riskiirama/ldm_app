@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+
 import 'package:ldm_app/components/theme.dart';
+import 'package:ldm_app/views/dashboard/role/supervisor/view_barang.dart';
 
 class CardBarang extends StatelessWidget {
   final String image;
   final String title;
-  final Icon icon;
-  const CardBarang(
-      {Key? key, required this.image, required this.title, required this.icon})
-      : super(key: key);
+
+  const CardBarang({
+    Key? key,
+    required this.image,
+    required this.title,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 17, left: 15, right: 26),
-      height: 100,
+      height: 120,
       width: double.infinity,
       decoration: BoxDecoration(
         boxShadow: [
@@ -46,7 +50,26 @@ class CardBarang extends StatelessWidget {
                 style: blackStyle.copyWith(
                     fontSize: 16, fontWeight: FontWeight.w500),
               ),
-              icon,
+              PopupMenuButton<int>(
+                iconSize: 20,
+                offset: Offset.zero,
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      value: 0,
+                      onTap: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('View'),
+                          Icon(Icons.remove_red_eye_outlined),
+                        ],
+                      ),
+                    ),
+                  ];
+                },
+                onSelected: (item) => SelectedItem(context, item),
+              ),
             ],
           ),
           Divider(
@@ -73,5 +96,14 @@ class CardBarang extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void SelectedItem(BuildContext context, item) {
+    switch (item) {
+      case 0:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ViewBarangPage()));
+        break;
+    }
   }
 }

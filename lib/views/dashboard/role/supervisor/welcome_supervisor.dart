@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ldm_app/components/theme.dart';
+import 'package:ldm_app/views/dashboard/role/supervisor/add.dart';
 
-import '../controllers/welcome_controller.dart';
+import '../../../../controllers/welcome_supervisor.dart';
 
-class WelcomePage extends StatelessWidget {
-  final welcomeController = Get.put(WelcomeController());
+class WelcomeSupervisorPage extends StatelessWidget {
+  final welcomeController = Get.put(WelcomeSupervisor());
   @override
   Widget build(BuildContext context) {
     Widget cartButton() {
       return FloatingActionButton(
         backgroundColor: blueColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddPage()));
+        },
         child: Icon(Icons.add),
       );
     }
@@ -82,7 +86,7 @@ class WelcomePage extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xffF1F2F7),
         floatingActionButton: cartButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: customBottomNav(),

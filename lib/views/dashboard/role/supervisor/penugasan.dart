@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ldm_app/components/widgets/card_penugasan.dart';
 
-import '../../components/theme.dart';
+import '../../../../components/theme.dart';
 
 class PenugasanPage extends StatelessWidget {
   const PenugasanPage({Key? key}) : super(key: key);
