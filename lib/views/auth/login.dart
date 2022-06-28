@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ldm_app/components/theme.dart';
 import 'package:ldm_app/routes/route_app.dart';
+import 'package:ldm_app/views/auth/register.dart';
 
 class LoginPage extends StatelessWidget {
   var hidden = true.obs;
@@ -105,6 +106,13 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 18),
+          TextButton(
+            onPressed: () {
+              Get.to(RegisterPage());
+            },
+            child: Text('Register'),
+          )
         ],
       ),
     );

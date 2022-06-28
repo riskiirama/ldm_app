@@ -86,6 +86,7 @@ class WelcomeSupervisorPage extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Color(0xffF1F2F7),
         floatingActionButton: cartButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

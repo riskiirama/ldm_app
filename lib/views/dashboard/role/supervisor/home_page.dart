@@ -40,32 +40,21 @@ class HomePage extends StatelessWidget {
     }
 
     Widget search() {
-      return Container(
-        height: 44,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 1.5),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16, left: 10),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Temukan Tugas',
-                    hintStyle: blackStyle.copyWith(
-                      fontSize: 16,
-                      color: Color(0xFFA9A9A9),
-                    ),
-                    border: OutlineInputBorder(borderSide: BorderSide.none),
-                    suffixIcon: Icon(Icons.search),
-                  ),
-                ),
-              ),
-            ),
-          ],
+      return TextField(
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(10),
+          fillColor: Colors.white,
+          filled: true,
+          hintText: 'Temukan Tugas',
+          hintStyle: blackStyle.copyWith(
+            fontSize: 16,
+            color: Color(0xFFA9A9A9),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+          suffixIcon: Icon(Icons.search),
         ),
       );
     }

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../components/theme.dart';
+import '../../components/theme.dart';
 
-class AddPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   var hidden = false.obs;
   String? select;
+  String? select2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: blueColor,
           elevation: 0,
-          title: Text('Tambah Tugas'),
+          title: Text('Tambah User'),
         ),
         body: ListView(
           padding: EdgeInsets.all(20),
@@ -20,61 +21,42 @@ class AddPage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FormWidget('Deskripsi Tugas', 'Deskripsi Tugas'),
-                FormWidget('Detail Tugas', 'Detail Tugas'),
-                FormWidget('Alamat', 'Alamat'),
+                FormWidget('User', 'User'),
                 Text(
-                  'Tanggal',
+                  'Password',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(height: 10),
-                TextFormField(
-                  onTap: () async {
-                    await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime.now());
-                  },
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.date_range),
-                    hintText: 'dd/mm/yyy',
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                Obx(
+                  () => TextFormField(
+                    obscureText: hidden.value,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: 'Password',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () => hidden.toggle(),
+                        icon: hidden.isTrue
+                            ? Icon(Icons.remove_red_eye)
+                            : Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.grey,
+                              ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: 20),
+                FormWidget('Email', 'Email'),
+                FormWidget('Nomor Telepon', 'Nomor Telepon'),
                 Text(
-                  'Upload File',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  onTap: () async {},
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.file_copy),
-                    hintText: 'file',
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                FormWidget('Nama Penanggung Jawab Lokasi', 'Nama'),
-                FormWidget('Nomor Penangung Jawab Lokasi', '085**'),
-                Text(
-                  'Anggota',
+                  'Level',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -86,23 +68,31 @@ class AddPage extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.white,
                     contentPadding: EdgeInsets.all(10),
-                    hintText: 'Pilih Anggota',
+                    hintText: 'Select',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   items: [
                     DropdownMenuItem(
-                      child: Text('A'),
-                      value: 'A',
+                      child: Text('Admin'),
+                      value: 'Admin',
                     ),
                     DropdownMenuItem(
-                      child: Text('B'),
-                      value: 'B',
+                      child: Text('Supervisor'),
+                      value: 'Supervisor',
                     ),
                     DropdownMenuItem(
-                      child: Text('C'),
-                      value: 'C',
+                      child: Text('Teknisi'),
+                      value: 'Teknisi',
+                    ),
+                    DropdownMenuItem(
+                      child: Text('Gudang'),
+                      value: 'Gudang',
+                    ),
+                    DropdownMenuItem(
+                      child: Text('Boss'),
+                      value: 'Boss',
                     ),
                   ],
                   onChanged: (value) {
@@ -111,42 +101,38 @@ class AddPage extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Barang Yang Digunkanan',
+                  'Jenis Kelamin',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(height: 10),
                 DropdownButtonFormField(
-                  value: select,
+                  value: select2,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
                     contentPadding: EdgeInsets.all(10),
-                    hintText: 'Pilih Barang',
+                    hintText: 'Select',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   items: [
                     DropdownMenuItem(
-                      child: Text('A'),
-                      value: 'A',
+                      child: Text('Laki Laki'),
+                      value: 'Laki Laki',
                     ),
                     DropdownMenuItem(
-                      child: Text('B'),
-                      value: 'B',
-                    ),
-                    DropdownMenuItem(
-                      child: Text('C'),
-                      value: 'C',
+                      child: Text('Perempuan'),
+                      value: 'Perempuan',
                     ),
                   ],
                   onChanged: (value) {
-                    select = value as String;
+                    select2 = value as String;
                   },
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
                 Center(
                   child: Container(
                     width: Get.width / 2,
