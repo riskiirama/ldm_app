@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ldm_app/routes/route_app.dart';
 
 import '../../../../components/theme.dart';
 
@@ -93,15 +94,33 @@ class AddPage extends StatelessWidget {
                   ),
                   items: [
                     DropdownMenuItem(
-                      child: Text('A'),
+                      child: Row(
+                        children: [
+                          CircleAvatar(),
+                          SizedBox(width: 6),
+                          Text('A'),
+                        ],
+                      ),
                       value: 'A',
                     ),
                     DropdownMenuItem(
-                      child: Text('B'),
+                      child: Row(
+                        children: [
+                          CircleAvatar(),
+                          SizedBox(width: 6),
+                          Text('B'),
+                        ],
+                      ),
                       value: 'B',
                     ),
                     DropdownMenuItem(
-                      child: Text('C'),
+                      child: Row(
+                        children: [
+                          CircleAvatar(),
+                          SizedBox(width: 6),
+                          Text('C'),
+                        ],
+                      ),
                       value: 'C',
                     ),
                   ],
@@ -158,7 +177,9 @@ class AddPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAndToNamed(RouteHelper.welcome_supervisor);
+                      },
                       child: Text('Tambah'),
                     ),
                   ),

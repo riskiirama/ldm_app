@@ -11,6 +11,7 @@ class WelcomeSupervisorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget cartButton() {
       return FloatingActionButton(
+        enableFeedback: true,
         backgroundColor: blueColor,
         onPressed: () {
           Navigator.push(
@@ -86,6 +87,8 @@ class WelcomeSupervisorPage extends StatelessWidget {
 
     return Obx(() {
       return Scaffold(
+        extendBody: true,
+        primary: true,
         resizeToAvoidBottomInset: false,
         backgroundColor: Color(0xffF1F2F7),
         floatingActionButton: cartButton(),

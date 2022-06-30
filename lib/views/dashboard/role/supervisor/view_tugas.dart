@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../../components/theme.dart';
 
 class ViewTugasPage extends StatelessWidget {
-  var hidden = false.obs;
+  final hidden = false.obs;
   String? select;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,30 @@ class ViewTugasPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FormWidget('Deskripsi Tugas', 'Deskripsi Tugas'),
-                FormWidget('Detail Tugas', 'Detail Tugas'),
+                Text(
+                  'Detail Tugas',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 6),
+                TextFormField(
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.only(left: 12, right: 12, top: 12),
+                    hintText: 'Detail',
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 28,
+                ),
                 FormWidget('Alamat', 'Alamat'),
                 Text(
                   'Tanggal',
@@ -241,10 +264,9 @@ class DropdownWidget extends StatelessWidget {
 }
 
 class FormWidget extends StatelessWidget {
+  final String? title;
+  final String? hint;
   FormWidget(this.title, this.hint);
-  String? title;
-  String? hint;
-
   @override
   Widget build(BuildContext context) {
     return Column(
