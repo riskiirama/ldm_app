@@ -382,20 +382,54 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Text(
+                                    'Pemasangan Jaringan di Rumah',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    'Kedaton, Jl ZA Pagar Alam',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
                                   Row(
                                     children: [
-                                      Image.asset(
-                                        'assets/icons/barang.png',
-                                        height: 20,
+                                      Icon(
+                                        Icons.date_range,
+                                        color: Color(0xFF7879F1),
+                                        size: 20,
                                       ),
                                       SizedBox(width: 10),
                                       Text(
-                                        'TP-LINK TL-WR940N',
+                                        '7 Februari 2022',
                                         style: TextStyle(
                                           fontSize: 12,
                                         ),
                                       ),
                                       Expanded(child: SizedBox()),
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            primary: blueColor,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            )),
+                                        onPressed: () {},
+                                        child: Text(
+                                          'On Progress',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
                                       PopupMenuButton<int>(
                                         icon: Icon(Icons.more_vert),
                                         iconSize: 20,
@@ -447,29 +481,6 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ],
                                   ),
-                                  Divider(
-                                    thickness: 2,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Stock',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Expanded(child: SizedBox()),
-                                      Text(
-                                        '10',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                    ],
-                                  )
                                 ],
                               ),
                             ),
