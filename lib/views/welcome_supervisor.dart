@@ -112,7 +112,7 @@ class WelcomeSupervisorPage extends StatelessWidget {
         body: welcomeController.currentIndex.value == 0
             ? HomePage()
             : welcomeController.currentIndex.value == 1
-                ? box.read('key') != 'admin'
+                ? box.read('key')['role'] == 'admin'
                     ? AnggotaPage()
                     : PenugasanPage()
                 : welcomeController.currentIndex.value == 2

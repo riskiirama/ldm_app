@@ -2,14 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ldm_app/components/theme.dart';
-import 'package:ldm_app/views/auth/register.dart';
 import 'package:ldm_app/views/home_page.dart';
+import 'package:ldm_app/views/register.dart';
 import 'package:ldm_app/views/welcome_supervisor.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   var hidden = true.obs;
+
   var box = GetStorage();
+
   TextEditingController usernameC = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +118,7 @@ class LoginPage extends StatelessWidget {
                   );
                 } else if (usernameC.text == 'supervisor') {
                   Get.offAll(
-                    HomePage(),
+                    WelcomeSupervisorPage(),
                   );
                   box.write(
                     'key',

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ldm_app/views/auth/login.dart';
+import 'package:ldm_app/views/login.dart';
 import 'package:ldm_app/views/splash_page.dart';
 import 'package:ldm_app/views/welcome_supervisor.dart';
 
