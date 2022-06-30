@@ -11,12 +11,9 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0XFFF1F2F7),
-      body: Container(
-        margin: EdgeInsets.only(top: 38),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+        children: [
+          Column(
             children: [
               Text(
                 'Profil',
@@ -115,7 +112,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

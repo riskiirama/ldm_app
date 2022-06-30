@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:ldm_app/components/theme.dart';
-import 'package:ldm_app/views/dashboard/role/supervisor/view_barang.dart';
+import 'package:ldm_app/views/view_barang.dart';
 
 class CardBarang extends StatelessWidget {
   final String image;

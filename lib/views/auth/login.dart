@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:ldm_app/components/theme.dart';
-import 'package:ldm_app/routes/route_app.dart';
 import 'package:ldm_app/views/auth/register.dart';
+import 'package:ldm_app/views/home_page.dart';
+import 'package:ldm_app/views/welcome_supervisor.dart';
 
 class LoginPage extends StatelessWidget {
   var hidden = true.obs;
-
+  var box = GetStorage();
+  TextEditingController usernameC = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +43,7 @@ class LoginPage extends StatelessWidget {
             width: 286,
             height: 46,
             child: TextFormField(
+              controller: usernameC,
               decoration: InputDecoration(
                   filled: true,
                   //  fillColor: Colors.black,
@@ -94,7 +98,27 @@ class LoginPage extends StatelessWidget {
             ),
             child: TextButton(
               onPressed: () {
-                Get.toNamed(RouteHelper.role);
+                if (usernameC.text == 'admin') {
+                  Get.offAll(
+                    WelcomeSupervisorPage(),
+                  );
+                  box.write(
+                    'key',
+                    {
+                      'role': usernameC.text,
+                    },
+                  );
+                } else if (usernameC.text == 'supervisor') {
+                  Get.offAll(
+                    HomePage(),
+                  );
+                  box.write(
+                    'key',
+                    {
+                      'role': usernameC.text,
+                    },
+                  );
+                }
               },
               child: Text(
                 'Login',

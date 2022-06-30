@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:ldm_app/components/theme.dart';
-import 'package:ldm_app/views/dashboard/role/supervisor/add.dart';
-
+import 'package:ldm_app/views/add.dart';
+import 'package:ldm_app/views/anggota_page.dart';
+import 'package:ldm_app/views/barang.dart';
+import 'package:ldm_app/views/home_page.dart';
+import 'package:ldm_app/views/penugasan.dart';
+import 'package:ldm_app/views/profil.dart';
 import '../../../../controllers/welcome_supervisor.dart';
 
 class WelcomeSupervisorPage extends StatelessWidget {
   final welcomeController = Get.put(WelcomeSupervisor());
+  var box = GetStorage();
   @override
   Widget build(BuildContext context) {
     Widget cartButton() {
@@ -50,11 +56,16 @@ class WelcomeSupervisorPage extends StatelessWidget {
                   top: 20,
                   bottom: 10,
                 ),
-                child: Icon(
-                  Icons.date_range_outlined,
-                ),
+                child: box.read('key')['role'] != 'admin'
+                    ? Icon(
+                        Icons.date_range_outlined,
+                      )
+                    : Icon(
+                        Icons.group,
+                      ),
               ),
-              label: 'Penugasan',
+              label:
+                  box.read('key')['role'] != 'admin' ? 'Penugasan' : 'Anggota',
             ),
             BottomNavigationBarItem(
               icon: Container(
@@ -62,8 +73,12 @@ class WelcomeSupervisorPage extends StatelessWidget {
                   top: 20,
                   bottom: 10,
                 ),
-                child: Icon(
-                  Icons.notifications,
+                child: Image.asset(
+                  'assets/icons/cube.png',
+                  height: 30,
+                  color: welcomeController.currentIndex.value == 2
+                      ? Colors.white
+                      : Colors.black,
                 ),
               ),
               label: 'Barang',
@@ -94,50 +109,17 @@ class WelcomeSupervisorPage extends StatelessWidget {
         floatingActionButton: cartButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: customBottomNav(),
-        body: welcomeController.screens[welcomeController.currentIndex.value],
-        /*    bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: blueColor,
-          
-          selectedItemColor: Colors.white,
-          type: BottomNavigationBarType.fixed,
-          currentIndex: welcomeController.currentIndex.value,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.date_range_outlined,
-              ),
-              label: 'Penugasan',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.shop,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.notifications,
-              ),
-              label: 'Barang',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_outline_outlined,
-              ),
-              label: 'Profil',
-            ),
-          ],
-          onTap: (index) {
-            welcomeController.currentIndex.value = index;
-          },
-        ),
-        */
+        body: welcomeController.currentIndex.value == 0
+            ? HomePage()
+            : welcomeController.currentIndex.value == 1
+                ? box.read('key') != 'admin'
+                    ? AnggotaPage()
+                    : PenugasanPage()
+                : welcomeController.currentIndex.value == 2
+                    ? BarangPage()
+                    : welcomeController.currentIndex.value == 3
+                        ? ProfilePage()
+                        : ProfilePage(),
       );
     });
   }

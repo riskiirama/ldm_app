@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ldm_app/components/theme.dart';
-import 'package:ldm_app/views/dashboard/role/supervisor/edit_tugas.dart';
-import 'package:ldm_app/views/dashboard/role/supervisor/view_tugas.dart';
+import 'package:ldm_app/views/edit_tugas.dart';
+import 'package:ldm_app/views/view_tugas.dart';
 
 class CardPenugasan extends StatelessWidget {
   final String title;
