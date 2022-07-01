@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 
 import '../../../../components/theme.dart';
 
-class EditAnggotaPage extends StatefulWidget {
+class TambahAnggotaPage extends StatefulWidget {
   @override
-  State<EditAnggotaPage> createState() => _EditAnggotaPageState();
+  State<TambahAnggotaPage> createState() => _TambahAnggotaPageState();
 }
 
-class _EditAnggotaPageState extends State<EditAnggotaPage> {
+class _TambahAnggotaPageState extends State<TambahAnggotaPage> {
   final hidden = false.obs;
 
   String? select;
@@ -19,7 +19,7 @@ class _EditAnggotaPageState extends State<EditAnggotaPage> {
         appBar: AppBar(
           backgroundColor: blueColor,
           elevation: 0,
-          title: Text('Edit User'),
+          title: Text('Tambah User'),
         ),
         body: ListView(
           padding: EdgeInsets.all(20),
@@ -151,7 +151,7 @@ class _EditAnggotaPageState extends State<EditAnggotaPage> {
                         ),
                       ),
                       onPressed: () {},
-                      child: Text('Ubah'),
+                      child: Text('Tambah'),
                     ),
                   ),
                 )

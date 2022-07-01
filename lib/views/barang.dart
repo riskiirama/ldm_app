@@ -1,16 +1,106 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:ldm_app/views/view_barang.dart';
+import 'package:ldm_app/views/view_barang_gudang.dart';
 
 import '../../../../components/theme.dart';
+import 'edit_barang_gudang.dart';
 
-class BarangPage extends StatelessWidget {
-  const BarangPage({Key? key}) : super(key: key);
+class BarangPage extends StatefulWidget {
+  @override
+  State<BarangPage> createState() => _BarangPageState();
+}
+
+class _BarangPageState extends State<BarangPage> {
+  var box = GetStorage();
+
   void SelectedItem(BuildContext context, item) {
     switch (item) {
       case 0:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => ViewBarangPage()));
         break;
+    }
+  }
+
+  void selectedGudang(BuildContext context, item) {
+    switch (item) {
+      case 0:
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) {
+            return ViewBarangGudangPage();
+          }),
+        );
+        break;
+      case 1:
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) {
+            return EditBarangGudangPage();
+          }),
+        );
+        break;
+      case 2:
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            contentPadding:
+                EdgeInsets.only(left: 13, right: 13, bottom: 31, top: 7),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            backgroundColor: Color(0xff5D5FEF),
+            title: Column(
+              children: [
+                Icon(
+                  Icons.warning_amber,
+                  color: Colors.orange,
+                  size: 42,
+                ),
+                SizedBox(
+                  height: 43,
+                ),
+                Text(
+                  'Anda yakin akan \nmenghapus Ini?',
+                  style: blackStyle.copyWith(
+                    fontSize: 24,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Container(
+                    color: Color(0xff24D748),
+                    padding: const EdgeInsets.all(14),
+                    child: const Text(
+                      "Ya",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Container(
+                    color: Color(0xffE41830),
+                    padding: const EdgeInsets.all(14),
+                    child: const Text(
+                      "Tidak",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
     }
   }
 
@@ -106,30 +196,80 @@ class BarangPage extends StatelessWidget {
                                       ),
                                     ),
                                     Expanded(child: SizedBox()),
-                                    PopupMenuButton<int>(
-                                      icon: Icon(Icons.more_vert),
-                                      iconSize: 20,
-                                      // offset: Offset.zero,
-                                      itemBuilder: (context) {
-                                        return [
-                                          PopupMenuItem(
-                                            value: 0,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text('View'),
-                                                Icon(Icons
-                                                    .remove_red_eye_outlined),
-                                              ],
-                                            ),
+                                    box.read('key')['role'] == 'gudang'
+                                        ? PopupMenuButton<int>(
+                                            icon: Icon(Icons.more_vert),
+                                            iconSize: 30,
+                                            // offset: Offset.zero,
+                                            itemBuilder: (context) {
+                                              return [
+                                                PopupMenuItem(
+                                                  value: 0,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text('View'),
+                                                      Icon(Icons
+                                                          .remove_red_eye_outlined),
+                                                    ],
+                                                  ),
+                                                ),
+                                                PopupMenuItem(
+                                                  value: 1,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text('Edit'),
+                                                      Icon(Icons.edit),
+                                                    ],
+                                                  ),
+                                                ),
+                                                PopupMenuItem(
+                                                  value: 2,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text('Delete'),
+                                                      Icon(Icons
+                                                          .restore_from_trash_outlined),
+                                                    ],
+                                                  ),
+                                                )
+                                              ];
+                                            },
+                                            onSelected: (item) =>
+                                                selectedGudang(context, item),
+                                          )
+                                        : PopupMenuButton<int>(
+                                            icon: Icon(Icons.more_vert),
+                                            iconSize: 20,
+                                            // offset: Offset.zero,
+                                            itemBuilder: (context) {
+                                              return [
+                                                PopupMenuItem(
+                                                  value: 0,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text('View'),
+                                                      Icon(Icons
+                                                          .remove_red_eye_outlined),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ];
+                                            },
+                                            onSelected: (item) =>
+                                                SelectedItem(context, item),
                                           ),
-                                        ];
-                                      },
-                                      onSelected: (item) =>
-                                          SelectedItem(context, item),
-                                    ),
                                   ],
                                 ),
                                 Divider(

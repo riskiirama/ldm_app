@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ldm_app/components/theme.dart';
-import 'package:ldm_app/components/widgets/card_penugasan.dart';
 import 'package:ldm_app/views/edit_anggota.dart';
+import 'package:ldm_app/views/edit_barang_gudang.dart';
 import 'package:ldm_app/views/view_anggota.dart';
+import 'package:ldm_app/views/view_barang_gudang.dart';
 import 'package:ldm_app/views/view_tugas.dart';
 
 import 'edit_tugas.dart';
@@ -178,6 +179,87 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void selectedGudang(BuildContext context, item) {
+    switch (item) {
+      case 0:
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) {
+            return ViewBarangGudangPage();
+          }),
+        );
+        break;
+      case 1:
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) {
+            return EditBarangGudangPage();
+          }),
+        );
+        break;
+      case 2:
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            contentPadding:
+                EdgeInsets.only(left: 13, right: 13, bottom: 31, top: 7),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            backgroundColor: Color(0xff5D5FEF),
+            title: Column(
+              children: [
+                Icon(
+                  Icons.warning_amber,
+                  color: Colors.orange,
+                  size: 42,
+                ),
+                SizedBox(
+                  height: 43,
+                ),
+                Text(
+                  'Anda yakin akan \nmenghapus Ini?',
+                  style: blackStyle.copyWith(
+                    fontSize: 24,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Container(
+                    color: Color(0xff24D748),
+                    padding: const EdgeInsets.all(14),
+                    child: const Text(
+                      "Ya",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Container(
+                    color: Color(0xffE41830),
+                    padding: const EdgeInsets.all(14),
+                    child: const Text(
+                      "Tidak",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget header() {
@@ -237,7 +319,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            box.read('key')['role'] == 'admin' ? 'Anggota A' : 'Tugas 5',
+            box.read('key')['role'] == 'admin' ? 'Anggota 8' : 'Tugas 5',
             style: blackStyle.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.w700,
@@ -266,7 +348,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 68),
               titleHome(),
               SizedBox(height: 26),
-              box.read('key')['role'] == 'admin'
+              box.read('key')['role'] == 'gudang'
                   ? Expanded(
                       child: ListView.builder(
                         itemCount: 10,
@@ -280,32 +362,15 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Rich Brian',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Teknisi',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  Divider(
-                                    thickness: 2,
-                                  ),
                                   Row(
                                     children: [
-                                      Icon(
-                                        Icons.call,
-                                        color: Color(0xFF7879F1),
-                                        size: 20,
+                                      Image.asset(
+                                        'assets/icons/barang.png',
+                                        height: 20,
                                       ),
                                       SizedBox(width: 10),
                                       Text(
-                                        '081212121212',
+                                        'TP-LINK TL-WR940N',
                                         style: TextStyle(
                                           fontSize: 12,
                                         ),
@@ -313,7 +378,7 @@ class _HomePageState extends State<HomePage> {
                                       Expanded(child: SizedBox()),
                                       PopupMenuButton<int>(
                                         icon: Icon(Icons.more_vert),
-                                        iconSize: 20,
+                                        iconSize: 30,
                                         // offset: Offset.zero,
                                         itemBuilder: (context) {
                                           return [
@@ -358,8 +423,31 @@ class _HomePageState extends State<HomePage> {
                                           ];
                                         },
                                         onSelected: (item) =>
-                                            SelectedItem(context, item),
+                                            selectedGudang(context, item),
                                       ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    thickness: 2,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Stock',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Expanded(child: SizedBox()),
+                                      Text(
+                                        '10',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
                                     ],
                                   )
                                 ],
@@ -369,125 +457,269 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     )
-                  : Expanded(
-                      child: ListView.builder(
-                        itemCount: 10,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Pemasangan Jaringan di Rumah',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Kedaton, Jl ZA Pagar Alam',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  Divider(
-                                    thickness: 2,
-                                  ),
-                                  Row(
+                  : box.read('key')['role'] == 'admin'
+                      ? Expanded(
+                          child: ListView.builder(
+                            itemCount: 10,
+                            itemBuilder: (context, index) {
+                              return Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Icon(
-                                        Icons.date_range,
-                                        color: Color(0xFF7879F1),
-                                        size: 20,
-                                      ),
-                                      SizedBox(width: 10),
                                       Text(
-                                        '7 Februari 2022',
+                                        'Rich Brian',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        'Teknisi',
+                                        style: TextStyle(),
+                                      ),
+                                      Divider(
+                                        thickness: 2,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.call,
+                                            color: Color(0xFF7879F1),
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            '081212121212',
+                                            style: TextStyle(),
+                                          ),
+                                          Expanded(child: SizedBox()),
+                                          PopupMenuButton<int>(
+                                            icon: Icon(Icons.more_vert),
+                                            iconSize: 30,
+                                            // offset: Offset.zero,
+                                            itemBuilder: (context) {
+                                              return [
+                                                PopupMenuItem(
+                                                  value: 0,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text('View'),
+                                                      Icon(Icons
+                                                          .remove_red_eye_outlined),
+                                                    ],
+                                                  ),
+                                                ),
+                                                PopupMenuItem(
+                                                  value: 1,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text('Edit'),
+                                                      Icon(Icons.edit),
+                                                    ],
+                                                  ),
+                                                ),
+                                                PopupMenuItem(
+                                                  value: 2,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text('Delete'),
+                                                      Icon(Icons
+                                                          .restore_from_trash_outlined),
+                                                    ],
+                                                  ),
+                                                )
+                                              ];
+                                            },
+                                            onSelected: (item) =>
+                                                SelectedItem(context, item),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      : Expanded(
+                          child: ListView.builder(
+                            itemCount: 10,
+                            itemBuilder: (context, index) {
+                              return Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Pemasangan Jaringan di Rumah',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        'Kedaton, Jl ZA Pagar Alam',
                                         style: TextStyle(
                                           fontSize: 12,
                                         ),
                                       ),
-                                      Expanded(child: SizedBox()),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            primary: blueColor,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            )),
-                                        onPressed: () {},
-                                        child: Text(
-                                          'On Progress',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                          ),
-                                        ),
+                                      Divider(
+                                        thickness: 2,
                                       ),
-                                      PopupMenuButton<int>(
-                                        icon: Icon(Icons.more_vert),
-                                        iconSize: 20,
-                                        // offset: Offset.zero,
-                                        itemBuilder: (context) {
-                                          return [
-                                            PopupMenuItem(
-                                              value: 0,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('View'),
-                                                  Icon(Icons
-                                                      .remove_red_eye_outlined),
-                                                ],
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.date_range,
+                                            color: Color(0xFF7879F1),
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            '7 Februari 2022',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          Expanded(child: SizedBox()),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: blueColor,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                )),
+                                            onPressed: () {},
+                                            child: Text(
+                                              'On Progress',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.white,
                                               ),
                                             ),
-                                            PopupMenuItem(
-                                              value: 1,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('Edit'),
-                                                  Icon(Icons.edit),
-                                                ],
-                                              ),
-                                            ),
-                                            PopupMenuItem(
-                                              value: 2,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text('Delete'),
-                                                  Icon(Icons
-                                                      .restore_from_trash_outlined),
-                                                ],
-                                              ),
-                                            )
-                                          ];
-                                        },
-                                        onSelected: (item) =>
-                                            selectedPenugasan(context, item),
+                                          ),
+                                          box.read('key')['role'] ==
+                                                      'teknisi' ||
+                                                  box.read('key')['role'] ==
+                                                      'boss'
+                                              ? PopupMenuButton<int>(
+                                                  icon: Icon(Icons.more_vert),
+                                                  iconSize: 30,
+                                                  // offset: Offset.zero,
+                                                  itemBuilder: (context) {
+                                                    return [
+                                                      PopupMenuItem(
+                                                        value: 0,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('View'),
+                                                            Icon(Icons
+                                                                .remove_red_eye_outlined),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      PopupMenuItem(
+                                                        value: 1,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Isi'),
+                                                            Icon(Icons.edit),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ];
+                                                  },
+                                                  onSelected: (item) =>
+                                                      SelectedItem(
+                                                          context, item),
+                                                )
+                                              : PopupMenuButton<int>(
+                                                  icon: Icon(Icons.more_vert),
+                                                  iconSize: 20,
+                                                  // offset: Offset.zero,
+                                                  itemBuilder: (context) {
+                                                    return [
+                                                      PopupMenuItem(
+                                                        value: 0,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('View'),
+                                                            Icon(Icons
+                                                                .remove_red_eye_outlined),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      PopupMenuItem(
+                                                        value: 1,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Edit'),
+                                                            Icon(Icons.edit),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      PopupMenuItem(
+                                                        value: 2,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text('Delete'),
+                                                            Icon(Icons
+                                                                .restore_from_trash_outlined),
+                                                          ],
+                                                        ),
+                                                      )
+                                                    ];
+                                                  },
+                                                  onSelected: (item) =>
+                                                      selectedPenugasan(
+                                                          context, item),
+                                                )
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
             ],
           ),
         ),

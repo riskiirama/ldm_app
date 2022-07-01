@@ -19,7 +19,7 @@ class _ViewAnggotaPageState extends State<ViewAnggotaPage> {
         appBar: AppBar(
           backgroundColor: blueColor,
           elevation: 0,
-          title: Text('View Anggota'),
+          title: Text('View User'),
         ),
         body: ListView(
           padding: EdgeInsets.all(20),
@@ -27,12 +27,12 @@ class _ViewAnggotaPageState extends State<ViewAnggotaPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FormWidget('User', 'User'),
-                FormWidget('Password', 'Password'),
-                FormWidget('Email', 'Email'),
-                FormWidget('Nomor Telepon', 'Nomor Telepon'),
-                FormWidget('Level', 'Level'),
-                FormWidget('Jenis Kelamin', 'Jenis Kelamin'),
+                FormWidget('User', 'Jhon Doe'),
+                FormWidget('Password', '******'),
+                FormWidget('Email', 'riski@gmail.com'),
+                FormWidget('Nomor Telepon', '089*****'),
+                FormWidget('Level', 'Admin'),
+                FormWidget('Jenis Kelamin', 'Laki - Laki'),
               ],
             ),
           ],
@@ -70,15 +70,19 @@ class FormWidget extends StatelessWidget {
         ),
         SizedBox(height: 10),
         TextFormField(
+          readOnly: true,
           decoration: InputDecoration(
-            fillColor: Colors.white,
-            filled: true,
-            contentPadding: EdgeInsets.all(10),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            hintText: hint ?? '',
-          ),
+              fillColor: Colors.white,
+              filled: true,
+              contentPadding: EdgeInsets.all(10),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              hintText: hint ?? '',
+              hintStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              )),
         ),
         SizedBox(height: 20),
       ],

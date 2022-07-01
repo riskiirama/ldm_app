@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 46,
             child: Obx(() {
               return TextFormField(
-                obscureText: true,
+                obscureText: hidden.value,
                 decoration: InputDecoration(
                   filled: true,
                   //  fillColor: Colors.black,
@@ -117,6 +117,36 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   );
                 } else if (usernameC.text == 'supervisor') {
+                  Get.offAll(
+                    WelcomeSupervisorPage(),
+                  );
+                  box.write(
+                    'key',
+                    {
+                      'role': usernameC.text,
+                    },
+                  );
+                } else if (usernameC.text == 'boss') {
+                  Get.offAll(
+                    WelcomeSupervisorPage(),
+                  );
+                  box.write(
+                    'key',
+                    {
+                      'role': usernameC.text,
+                    },
+                  );
+                } else if (usernameC.text == 'teknisi') {
+                  Get.offAll(
+                    WelcomeSupervisorPage(),
+                  );
+                  box.write(
+                    'key',
+                    {
+                      'role': usernameC.text,
+                    },
+                  );
+                } else if (usernameC.text == 'gudang') {
                   Get.offAll(
                     WelcomeSupervisorPage(),
                   );

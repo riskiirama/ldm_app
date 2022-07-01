@@ -1,11 +1,39 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../components/theme.dart';
 
-class EditTugasPage extends StatelessWidget {
+class EditTugasPage extends StatefulWidget {
+  @override
+  State<EditTugasPage> createState() => _EditTugasPageState();
+}
+
+class _EditTugasPageState extends State<EditTugasPage> {
   var hidden = false.obs;
+
   String? select;
+
+  final ImagePicker imgpicker = ImagePicker();
+  List<XFile>? imagefiles;
+
+  openImages() async {
+    try {
+      var pickedfiles = await imgpicker.pickMultiImage();
+      //you can use ImageCourse.camera for Camera capture
+      if (pickedfiles != null) {
+        imagefiles = pickedfiles;
+        setState(() {});
+      } else {
+        print("No image is selected.");
+      }
+    } catch (e) {
+      print("error while picking file.");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,19 +85,57 @@ class EditTugasPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                TextFormField(
-                  onTap: () async {},
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.file_copy),
-                    hintText: 'file',
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                Container(
+                  height: 100,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1,
                     ),
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          openImages();
+                        },
+                        icon: Icon(Icons.add_photo_alternate_outlined),
+                      ),
+                      Text('Klik area ini untuk upload File')
+                    ],
                   ),
                 ),
+                SizedBox(height: 20),
+                imagefiles != null
+                    ? Container(
+                        height: 100,
+                        width: Get.width,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: imagefiles?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.file(
+                                    File(imagefiles!.elementAt(index).path),
+                                    fit: BoxFit.cover,
+                                    height: 100,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    : Container(),
                 SizedBox(height: 20),
                 FormWidget('Nama Penanggung Jawab Lokasi', 'Nama'),
                 FormWidget('Nomor Penangung Jawab Lokasi', '085**'),
